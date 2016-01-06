@@ -2,6 +2,7 @@
  * This application will scan for all WiFi networks available.
  * It scans upon opening the app and then when the refresh menu option is clicked.
  * It uses a broadcast receiver to display the results of the scan.
+ * There will be 2 menu items on the Action Bar - one with text and one with an icon.
  */
 
 package com.course.example.wificonnections;
@@ -39,17 +40,17 @@ public class MainActivity extends Activity {
        // Initiate wifi service manager
        mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         
-       // Check for wifi is disabled
+       // Check if wifi is disabled
        if (mainWifi.isWifiEnabled() == false)
             {   
                 // If wifi disabled then enable it
-                Toast.makeText(getApplicationContext(), "wifi is disabled..making it enabled", 
-                Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "wifi is disabled..making it enabled",
+                    Toast.LENGTH_LONG).show();
                  
                 mainWifi.setWifiEnabled(true);
             } 
         
-       // create wifi scaned value broadcast receiver object
+       // create broadcast receiver object
        receiverWifi = new WifiReceiver();
         
        // Register broadcast receiver 
@@ -81,7 +82,7 @@ public class MainActivity extends Activity {
     }
      
    
-    //Broacast receiver class
+    //Broacast receiver inner class
     class WifiReceiver extends BroadcastReceiver {
          
         // This method call when scan has completed and results are available
